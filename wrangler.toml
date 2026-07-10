@@ -6,7 +6,7 @@
 # dashboard UI (Settings → Variables and Bindings) after the Worker is
 # created — the values here just make it reproducible.
 
-name = "scriptura-bot"
+name = "scriptura"
 main = "worker.js"
 compatibility_date = "2024-11-06"
 
