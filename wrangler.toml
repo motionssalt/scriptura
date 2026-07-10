@@ -1,0 +1,51 @@
+# wrangler.toml — Cloudflare Worker configuration for Scriptura.
+#
+# You do NOT need the Wrangler CLI to deploy this project. This file is
+# checked in so the Cloudflare dashboard's Git integration can read it
+# during builds. All bindings below can also be configured via the
+# dashboard UI (Settings → Variables and Bindings) after the Worker is
+# created — the values here just make it reproducible.
+
+name = "scriptura-bot"
+main = "worker.js"
+compatibility_date = "2024-11-06"
+
+# ─── D1 database binding ─────────────────────────────────────────────────────
+# Scriptura stores every user's reading plan, streak, completed days, and
+# current input state in a single D1 table (`scriptura_progress`, see
+# schema.sql). The code references the binding as `env.DB`, so the variable
+# name below MUST stay `DB` — case-sensitive.
+#
+# The database_id below is a placeholder. Bind the real database via the
+# dashboard: Workers & Pages → scriptura → Settings → Variables and Bindings
+# → D1 Database Bindings → Add binding, variable name `DB`, pick your
+# `scriptura` database from the dropdown. Then either update the ID below
+# and re-push, or delete this whole [[d1_databases]] block — the dashboard
+# binding wins either way.
+[[d1_databases]]
+binding = "DB"
+database_name = "scriptura"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# ─── KV namespace binding (membership cache) ─────────────────────────────────
+# SCRIPTURA_KV caches @motionsalt channel-membership checks for 1 hour
+# (see the CHANNEL-FOLLOW GATE section in worker.js) so we don't hit
+# Telegram's getChatMember API on every single message from a verified
+# user. Create a KV namespace in the dashboard (Workers & Pages → KV →
+# Create namespace, name it `scriptura-membership`), then either paste
+# its ID below OR bind it via Settings → Variables and Bindings →
+# KV Namespace Bindings (variable name: SCRIPTURA_KV) and delete this
+# block. The gate degrades gracefully if this binding is missing — it
+# will just re-check every message instead of caching — but you almost
+# certainly want the cache in production.
+[[kv_namespaces]]
+binding = "SCRIPTURA_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+
+# ─── Secrets (do NOT commit real values) ─────────────────────────────────────
+# Configure in the dashboard under Settings → Variables and Bindings → Secrets:
+#
+#   TELEGRAM_TOKEN    (required)  the bot token from @BotFather.
+#                                 NOTE: the code reads env.TELEGRAM_TOKEN
+#                                 (not TELEGRAM_BOT_TOKEN) — match that name
+#                                 exactly when creating the secret.
