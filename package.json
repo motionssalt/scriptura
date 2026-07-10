@@ -1,0 +1,16 @@
+{
+  "name": "scriptura",
+  "version": "1.0.0",
+  "description": "Scriptura — a Telegram bot that runs adaptive Bible reading plans (66 books / 1189 chapters, four reading modes, streaks, catch-up math). Cloudflare Worker + D1.",
+  "private": true,
+  "type": "module",
+  "main": "worker.js",
+  "scripts": {
+    "//": "No local dev scripts — this project is deployed via Cloudflare's dashboard Git integration. See README.md.",
+    "deploy-hint": "echo 'Deploy through the Cloudflare dashboard (Workers → Create → Connect Git). See README.md.'"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18"
+  }
+}
