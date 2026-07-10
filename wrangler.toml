@@ -25,7 +25,7 @@ compatibility_date = "2024-11-06"
 [[d1_databases]]
 binding = "DB"
 database_name = "scriptura"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "d50a7540-fe08-488f-aab0-3949373dd963"
 
 # ─── KV namespace binding (membership cache) ─────────────────────────────────
 # SCRIPTURA_KV caches @motionsalt channel-membership checks for 1 hour
@@ -40,7 +40,7 @@ database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
 # certainly want the cache in production.
 [[kv_namespaces]]
 binding = "SCRIPTURA_KV"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+id = "1ea1721ee8fb4b1b98a8f02cfd98b617"
 
 # ─── Secrets (do NOT commit real values) ─────────────────────────────────────
 # Configure in the dashboard under Settings → Variables and Bindings → Secrets:
