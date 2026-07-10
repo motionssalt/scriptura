@@ -959,8 +959,7 @@ async function handleMenu(env, chatId, msgId) {
     const quote = getQuote();
     let text = `🕊️ <b>Scriptura</b> — MOTIONSALT\n`;
     text += `━━━━━━━━━━━━━━━━━\n\n`;
-    text += `${quote}\n\n`;
-    text += `📢 <a href="${CHANNEL}">Join the MOTIONSALT community</a>`;
+    text += quote;
     msgId
         ? await editMessage(env, chatId, msgId, text, mainMenuKeyboard())
         : await sendMessage(env, chatId, text, mainMenuKeyboard());
@@ -1355,8 +1354,7 @@ async function dispatchUpdate(env, update) {
                 welcome += `━━━━━━━━━━━━━━━━━\n\n`;
                 welcome += `<b>Scriptura</b> — Your daily Bible reading companion 📖\n`;
                 welcome += `By MOTIONSALT\n\n`;
-                welcome += `${quote}\n\n`;
-                welcome += `📢 <a href="${CHANNEL}">Join the MOTIONSALT community</a>`;
+                welcome += quote;
                 await sendMessage(env, chatId, welcome, mainMenuKeyboard());
                 return;
             }
